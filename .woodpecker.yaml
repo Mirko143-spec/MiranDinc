@@ -1,0 +1,49 @@
+steps:
+  - name: build-dry-run
+    image: woodpeckerci/plugin-docker-buildx:4.2.0
+    settings:
+      dry-run: true
+      repo: registry-local.devops.svc.cluster.local/mirkodinc
+      tags: git-${CI_COMMIT_SHA:0:4}
+      dockerfile: Dockerfile
+    when:
+      - event: [pull_request]
+        branch:
+          exclude: main
+
+  - name: publish
+    image: woodpeckerci/plugin-docker-buildx:4.2.0
+    settings:
+      repo: registry-local.devops.svc.cluster.local/mirkodinc
+      tags: git-${CI_COMMIT_SHA:0:4}
+      dockerfile: Dockerfile
+      buildkit_config: |
+        [registry."registry-local.devops.svc.cluster.local"]
+          http = true
+          insecure = true
+    when:
+      - event: [push]
+        branch: [main]
+
+  - name: deploy
+    image: pelotech/drone-helm3
+    settings:
+      mode: upgrade
+      namespace: apps
+      chart: rojandinc/web
+      chart_version: 0.1.0
+      add_repos: ["rojandinc=https://rojandinc.github.io/helm-charts"]
+      release: mirkodinc
+      skip_tls_verify: true
+      values: "image.tag=git-${CI_COMMIT_SHA:0:4}"
+      values_files:
+        - "environment/values.yaml"
+      api_server:
+        from_secret: api_server
+      kubernetes_token:
+        from_secret: kubernetes_token
+    depends_on: [publish]
+    when:
+      - event: [push]
+        branch: [main]
+
