@@ -5,105 +5,40 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
-  font-size: 35px;
-}
-
-h2 {
-  font-size: 25px;
-}
-
-body {
-  height: 100vh;
-  width: 99vw;
-  background-color: #262424;
-  scroll-behavior: smooth;
-}
-
-p {
-  font-size: 20px;
-}
-
-a {
-  color: black;
-}
-
-.nav {
+.main-card {
   display: flex;
-  justify-content: space-between;
-  margin: auto;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  background-color: #eee5da;
-  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 900px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.nav-title {
-  padding-left: 10px;
-  padding-bottom: 5px;
-  margin: 10px;
+.main-card::before {
+  content: "";
+  position: absolute;
+  background: url(/images/Snapchat-1273906265.jpg) no-repeat center;
+  height: 900px;
+  width: 100%;
+  z-index: -1;
+  filter: blur(5px);
 }
 
-.nav-title:hover {
-  color: rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-}
-
-.title-card {
-  margin-bottom: 10px;
-}
-
-.box {
-  display: flex;
-  justify-content: flex-start;
-  background-color: #eee5da;
-  width: 50%;
-  margin: auto;
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 50px;
-}
-
-.proj-title {
-  display: flex;
-  justify-content: flex-start;
-  width: 50%;
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 10px;
-  color: whitesmoke;
-  font-size: 40px;
-}
-
-.proj-box {
-  display: flex;
-  justify-content: flex-start;
-  background-color: #eee5da;
-  width: 50%;
-  margin: auto;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  padding: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-gap: 10px;
-}
-
-.grid-item {
-  background-color: #262424;
+.main-title {
+  font-size: 120px;
   color: white;
-  padding: 10px;
-  border-radius: 15px;
 }
 
-ul {
-  padding: 10px;
+.cards {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 900px;
+  background-color: #000000dc;
 }
 
-li {
-  font-size: 20px;
-  padding: 5px;
+.cards-title {
+  font-size: 80px;
+  color: white;
+  margin-top: 50px;
 }
