@@ -5,7 +5,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#main-card {
+.main-card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,14 +13,14 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#main-card::before {
+.main-card::before {
   content: "";
   position: absolute;
-  background: url(/images/davko.png) no-repeat center;
+  background: url(/images/Snapchat-1273906265.jpg) no-repeat center;
   height: 900px;
   width: 100%;
   z-index: -1;
-  filter: blur(4px);
+  filter: blur(5px);
 }
 
 .main-title {
@@ -28,14 +28,14 @@
   color: white;
 }
 
-#projects-card {
+.cards {
   display: flex;
   justify-content: center;
   height: 900px;
   background-color: #000000dc;
 }
 
-.projects-title {
+.cards-title {
   font-size: 80px;
   color: white;
   margin-top: 50px;
