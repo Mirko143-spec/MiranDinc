@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("/images/8-bit-background-2.png");
+  background-size: cover;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+.trash,
+.folder,
+.chrome,
+.spotify {
+  width: 4rem;
+  height: 4rem;
+  margin: 1rem 1.5rem;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.trash {
+  background-image: url("/images/trash.png");
+  margin: 1rem 0.95rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+.folder {
+  background-image: url("/images/folder.png");
+}
+
+.chrome {
+  background-image: url("/images/chrome.png");
+}
+
+.spotify {
+  background-image: url("/images/spotify.png");
+}
