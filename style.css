@@ -9,9 +9,23 @@ body {
   width: 100vw;
   background-image: url("/images/8-bit-background-2.png");
   background-size: cover;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}
+
+p {
+  font-size: 12px;
 }
 
 section {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
   display: flex;
   flex-direction: column;
 }
@@ -19,10 +33,12 @@ section {
 .trash,
 .folder,
 .chrome,
-.spotify {
+.spotify,
+.steam,
+.home {
   width: 4rem;
   height: 4rem;
-  margin: 1rem 1.5rem;
+  margin: 1rem 1.8rem;
   background-size: cover;
   background-color: transparent;
   border: none;
@@ -31,13 +47,19 @@ section {
 
 .trash {
   background-image: url("/images/trash.png");
-  margin: 1rem 0.95rem;
-  width: 5rem;
-  height: 5rem;
+}
+
+.btn-group {
+  align-items: center;
+  text-align: center;
 }
 
 .folder {
   background-image: url("/images/folder.png");
+}
+
+.folder:active {
+  background-image: url("/images/open-folder.png");
 }
 
 .chrome {
@@ -46,4 +68,28 @@ section {
 
 .spotify {
   background-image: url("/images/spotify.png");
+  margin-left: 2rem;
+}
+
+.steam {
+  background-image: url("/images/steam.png");
+}
+
+.home {
+  background-image: url("/images/home.png");
+  width: 3rem;
+  height: 3rem;
+  margin: 0.5rem 0.7rem;
+}
+
+nav {
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  bottom: 0;
+}
+
+ul {
+  list-style: none;
 }
