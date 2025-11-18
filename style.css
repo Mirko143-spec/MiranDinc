@@ -65,6 +65,20 @@ section {
   border-radius: 10px;
 }
 
+#close {
+  background-color: rgb(31, 32, 33);
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+#close img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 ::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
