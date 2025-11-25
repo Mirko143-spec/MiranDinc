@@ -1,12 +1,11 @@
 image:
-  repository: registry.devops/mirkodinc
+  repository: registry.home/mirkodinc
   tag: latest
 ingress:
   enabled: true
   className: nginx
   annotations:
     external-dns.alpha.kubernetes.io/hostname: "mirko.rojandinc.se"
-    external-dns.alpha.kubernetes.io/target: tunnel.rojandinc.se
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
   hosts:
     - host: mirko.rojandinc.se

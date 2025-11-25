@@ -1,9 +1,9 @@
 steps:
   - name: build-dry-run
-    image: woodpeckerci/plugin-docker-buildx:4.2.0
+    image: woodpeckerci/plugin-kaniko:2.1.0
     settings:
       dry-run: true
-      repo: registry-local.devops.svc.cluster.local/mirkodinc
+      repo: mirkodinc
       tags: git-${CI_COMMIT_SHA:0:4}
       dockerfile: Dockerfile
     when:
@@ -11,15 +11,13 @@ steps:
         branch:
           exclude: main
   - name: publish
-    image: woodpeckerci/plugin-docker-buildx:4.2.0
+    image: woodpeckerci/plugin-kaniko:2.1.0
     settings:
-      repo: registry.devops/mirkodinc
+      repo: mirkodinc
       tags: git-${CI_COMMIT_SHA:0:4}
       dockerfile: Dockerfile
-      buildkit_config: |
-        [registry."registry.devops"]
-          http = true
-          insecure = true
+      registry: registry.rojandinc.se
+      insecure: true
     when:
       - event: [push]
         branch: [main]
