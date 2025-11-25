@@ -36,8 +36,7 @@ steps:
       values: "image.tag=git-${CI_COMMIT_SHA:0:4}"
       values_files:
         - "environment/values.yaml"
-      api_server:
-        from_secret: kubernetes_api_server
+      api_server: https://kubernetes.default
       kubernetes_token:
         from_secret: kubernetes_token
     depends_on: [publish]
