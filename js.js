@@ -22,3 +22,18 @@ aboutButton.addEventListener("click", async () => {
   } catch (error) {}
   aboutButton.style.backgroundImage = "url('/images/open-folder.png')";
 });
+
+function startTime() {
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  m = checkTime(m);
+  document.getElementById('clock').innerHTML = h + ":" + m;
+}
+
+function checkTime(i) {
+  return i < 10 ? "0" + i : i;
+}
+
+startTime();
+setInterval(startTime, 1000);
