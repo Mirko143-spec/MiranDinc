@@ -21,35 +21,6 @@ section {
   flex-direction: row;
 }
 
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.trash,
-.folder,
-.chrome,
-.spotify,
-.steam,
-.home {
-  width: 4rem;
-  height: 4rem;
-  margin: 1rem 1.8rem;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.trash {
-  background-image: url("/images/trash.png");
-}
-
-.btn-group {
-  align-items: center;
-  text-align: center;
-}
-
 .poke-modal {
   position: absolute;
   top: 55%;
@@ -161,6 +132,36 @@ section {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.trash,
+.folder,
+.chrome,
+.spotify,
+.steam,
+.pokedex,
+.home {
+  width: 4rem;
+  height: 4rem;
+  margin: 1rem 1.8rem;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.trash {
+  background-image: url("/images/trash.png");
+}
+
+.btn-group {
+  align-items: center;
+  text-align: center;
+}
+
 .folder {
   background-image: url("/images/folder.png");
 }
@@ -180,6 +181,10 @@ section {
 
 .steam {
   background-image: url("/images/steam.png");
+}
+
+.pokedex {
+  background-image: url("/images/pokedex.png");
 }
 
 .home {

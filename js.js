@@ -1,5 +1,5 @@
 const pokeModal = document.getElementById("poke-modal");
-const aboutButton = document.getElementById("about");
+const pokedexButton = document.querySelector(".pokedex");
 const closeButton = document.getElementById("close");
 const pokeContent = document.getElementById("poke-card-content");
 const pokeNew = document.getElementById("poke-new");
@@ -9,10 +9,9 @@ const sprite = document.getElementById("poke-sprite");
 
 closeButton.addEventListener("click", () => {
   pokeModal.close();
-  aboutButton.style.backgroundImage = "url('/images/folder.png')";
 });
 
-aboutButton.addEventListener("click", () => {
+pokedexButton.addEventListener("click", () => {
   pokeModal.showModal();
 
 });
@@ -54,7 +53,7 @@ async function displayData() {
 
   data.stats.forEach((s) => {
     const li = document.createElement("li");
-    li.textContent = `${s.stat.name}: ${s.base_stat}`;
+    li.textContent = `${s.stat.name}: ${s.base_stat}`.toUpperCase();
 
     stats.appendChild(li);
   });
