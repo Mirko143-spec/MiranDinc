@@ -18,39 +18,53 @@
     <div class="column">
       <div class="btn-group">
         <button class="trash"></button>
-        <p>Trash</p>
+        <p class="icon-p">Trash</p>
       </div>
       <div class="btn-group">
         <button id="projects" class="folder"></button>
-        <p>Projects</p>
+        <p class="icon-p">Projects</p>
       </div>
       <div class="btn-group">
-        <dialog id="about-modal" class="modal" closedby="">
-          <button id="close"><img src="/images/close.png" alt="close"></button>
-          <hr>
-          <div id="modal-content">
+        <dialog id="poke-modal" class="poke-modal">
+          <nav class="close-nav">
+            <button id="close"><img src="/images/close.png" alt="close"></button>
+          </nav>
+          <div class="poke-content">
+            <div class="poke-card">
+              <h1 class="poke-title">PokeDex</h1>
+              <div id="poke-card-content">
+                <img id="poke-sprite" src="" alt="sprite">
+                <h2 id="mon-title"></h2>
+                <ul id="poke-stats"></ul>
+                <button id="poke-new" class="poke-btn">New Pokemon</button>
+              </div>
+              <form id="poke-form">
+                <input id="poke-input" type="text" placeholder="Pokemon name">
+                <button id="poke-submit" type="submit" class="poke-btn">OK</button>
+              </form>
+            </div>
           </div>
         </dialog>
         <button id="about" class="folder"></button>
-        <p>About</p>
+        <p class="icon-p">About</p>
       </div>
       <div class="btn-group">
         <button class="chrome"></button>
-        <p>Chrome</p>
+        <p class="icon-p">Chrome</p>
       </div>
       <div class="btn-group">
         <button class="spotify"></button>
-        <p>Spotify</p>
+        <p class="icon-p">Spotify</p>
       </div>
     </div>
     <div class="column">
       <div class="btn-group">
         <button class="folder"></button>
-        <p>Games</p>
+        <p class="icon-p">Games</p>
       </div>
       <div class="btn-group">
         <button class="steam"></button>
-        <p>Steam</p>
+        <p class="icon-p">Steam</p>
       </div>
     </div>
   </section>

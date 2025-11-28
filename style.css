@@ -15,10 +15,6 @@ body {
   color: white;
 }
 
-p {
-  font-size: 12px;
-}
-
 section {
   width: fit-content;
   display: flex;
@@ -54,15 +50,22 @@ section {
   text-align: center;
 }
 
-.modal {
+.poke-modal {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
-  height: 75%;
-  background-color: rgb(31, 32, 33);
+  top: 55%;
+  left: 55%;
+  transform: translate(-55%, -55%);
+  width: 80%;
+  height: 80%;
+  background-color: #b48291;
   border-radius: 10px;
+}
+
+.close-nav {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 #close {
@@ -78,6 +81,81 @@ section {
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.poke-content {
+  height: fit-content;
+  width: 100%;
+}
+
+.poke-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-inline: auto;
+  background-color: #b48291;
+}
+
+.poke-title {
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+#poke-card-content {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#poke-sprite {
+  display: none;
+  width: 8rem;
+  height: 8rem;
+}
+
+#mon-title {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+#poke-stats {
+  list-style: none;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
+
+#poke-stats li {
+  font-size: 1rem;
+  margin: 1rem;
+}
+
+#poke-form {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+#poke-input,
+.poke-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.poke-btn:active {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
 
 ::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
@@ -111,6 +189,10 @@ section {
   margin: 0.5rem 0.7rem;
 }
 
+.icon-p {
+  font-size: 12px;
+}
+
 nav {
   width: 100%;
   height: fit-content;
@@ -119,16 +201,13 @@ nav {
   bottom: 0;
 }
 
-ul {
-  list-style: none;
-}
-
 .nav-list {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0;
+  list-style: none;
 }
 
 #clock {

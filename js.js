@@ -1,26 +1,71 @@
-const aboutModal = document.getElementById("about-modal");
+const pokeModal = document.getElementById("poke-modal");
 const aboutButton = document.getElementById("about");
 const closeButton = document.getElementById("close");
-const modalContent = document.getElementById("modal-content");
+const pokeContent = document.getElementById("poke-card-content");
+const pokeNew = document.getElementById("poke-new");
+const pokeForm = document.getElementById("poke-form");
+const pokeSubmit = document.getElementById("poke-submit");
+const sprite = document.getElementById("poke-sprite");
 
 closeButton.addEventListener("click", () => {
-  aboutModal.close();
+  pokeModal.close();
   aboutButton.style.backgroundImage = "url('/images/folder.png')";
 });
 
-aboutButton.addEventListener("click", async () => {
+aboutButton.addEventListener("click", () => {
+  pokeModal.showModal();
+
+});
+
+pokeSubmit.addEventListener("click", async (e) => {
+  e.preventDefault();
+  pokeContent.style.display = "flex";
+  pokeForm.style.display = "none";
+  sprite.style.display = "block";
+  displayData();
+});
+
+async function getData() {
   try {
-    const res = await fetch("/pages/test.html");
+    const pokeInput = document.getElementById("poke-input").value.toLowerCase();
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeInput}`);
 
     if (!res.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error(`Response status: ${res.status}`);
     }
 
-    const data = await res.text();
-    modalContent.innerHTML = data;
-    aboutModal.showModal();
-  } catch (error) {}
-  aboutButton.style.backgroundImage = "url('/images/open-folder.png')";
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function displayData() {
+  const data = await getData();
+  const pokeTitle = document.getElementById("mon-title");
+  const stats = document.getElementById("poke-stats");
+
+  const pokeSprite = data.sprites.front_default;
+  const title = data.name;
+
+  stats.innerHTML = "";
+
+  data.stats.forEach((s) => {
+    const li = document.createElement("li");
+    li.textContent = `${s.stat.name}: ${s.base_stat}`;
+
+    stats.appendChild(li);
+  });
+
+  pokeTitle.textContent = title;
+  sprite.src = pokeSprite;
+}
+
+pokeNew.addEventListener("click", () => {
+  pokeContent.style.display = "none";
+  pokeForm.style.display = "flex";
 });
 
 function startTime() {
