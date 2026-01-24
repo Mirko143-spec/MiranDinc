@@ -1,4 +1,4 @@
-import Desktop from "./Desktop";
+import Desktop from "./components/Desktop.tsx";
 
 function App() {
   return (
