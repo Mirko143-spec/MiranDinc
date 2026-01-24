@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none !important;
 }
 
 body {
@@ -9,16 +10,18 @@ body {
   width: 100vw;
   background-image: url("/images/8-bit-background-2.png");
   background-size: cover;
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 400;
   font-style: normal;
-  color: white;
+  color: white !important;
 }
 
 section {
   width: fit-content;
-  display: flex;
+  display: flex !important;
   flex-direction: row;
+}
+
+p {
+  margin-bottom: 0 !important;
 }
 
 .poke-modal {
@@ -28,8 +31,9 @@ section {
   transform: translate(-55%, -55%);
   width: 80%;
   height: 80%;
-  background-color: #b48291;
-  border-radius: 10px;
+  padding: 0 !important;
+  border-width: .4rem !important;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .close-nav {
@@ -37,15 +41,23 @@ section {
   top: 0;
   overflow: hidden;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(31, 32, 33);
+}
+
+.close-nav p {
+  color: white;
+  display: flex;
+  align-items: center;
+
 }
 
 #close {
   background-color: rgb(31, 32, 33);
   border: none;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
+  width: fit-content;
+  padding: 0.3rem;
 }
 
 #close img {
@@ -65,7 +77,6 @@ section {
   height: 100%;
   width: 100%;
   margin-inline: auto;
-  background-color: #b48291;
 }
 
 .poke-title {
@@ -107,6 +118,20 @@ section {
   display: flex;
   flex-direction: row;
   padding: 1rem;
+  height: 100%;
+  align-items: center;
+}
+
+.poke-icons {
+  width: 14rem !important;
+}
+
+.nes-bulbasaur {
+  margin-right: 1rem;
+}
+
+.nes-charmander {
+  margin-left: 1rem;
 }
 
 #poke-input,
@@ -114,12 +139,8 @@ section {
   font-size: 1.5rem;
   padding: 0.5rem;
   margin: 0.5rem;
-  border-radius: 10px;
-  outline: none;
-  border: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-clip: border-box;
   background-color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
 }
 
 .poke-btn:active {
@@ -150,7 +171,6 @@ section {
   background-size: cover;
   background-color: transparent;
   border: none;
-  cursor: pointer;
 }
 
 .trash {
@@ -213,6 +233,7 @@ nav {
   justify-content: space-between;
   padding: 0.5rem 0;
   list-style: none;
+  margin-bottom: 0;
 }
 
 #clock {
