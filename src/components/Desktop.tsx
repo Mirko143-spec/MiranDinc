@@ -7,6 +7,7 @@ import steam from "../assets/steam.png";
 import pokedex from "../assets/pokedex.png";
 import home from "../assets/home.png";
 import DigitalClock from "./DigitalClock.tsx";
+import Window from "./Window.tsx";
 
 function Desktop() {
   return (
@@ -24,6 +25,8 @@ function Desktop() {
           <Icon fileIcon={steam} fileName="Steam" />
           <Icon fileIcon={pokedex} fileName="PokeDex" />
         </div>
+
+        <Window />
       </section>
 
       <nav>
@@ -55,6 +58,5 @@ function Desktop() {
     </>
   );
 }
-
 
 export default Desktop;
