@@ -14,7 +14,7 @@ function DigitalClock() {
   }, []);
 
   function formatTime() {
-    let hours = time.getHours();
+    const hours = time.getHours();
     const minutes = time.getMinutes();
 
     return `${padZero(hours)}:${padZero(minutes)}`;
@@ -23,7 +23,7 @@ function DigitalClock() {
   function padZero(number: number) {
     return (number < 10 ? "0" : "") + number;
   }
-  return <div style={{ marginRight: "1rem" }}>{formatTime()}</div>;
+  return <div className="mr-4">{formatTime()}</div>;
 }
 
 export default DigitalClock;

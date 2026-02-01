@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -14,45 +18,4 @@ body {
   font-weight: 400;
   font-style: normal;
   color: white;
-}
-
-section {
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.btn-group {
-  align-items: center;
-  text-align: center;
-}
-
-.icon-p {
-  font-size: 12px;
-}
-
-nav {
-  width: 100%;
-  height: fit-content;
-  background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  bottom: 0;
-}
-
-.nav-list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  list-style: none;
-}
-
-#clock {
-  margin-right: 1rem;
 }
