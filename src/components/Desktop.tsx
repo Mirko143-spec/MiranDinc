@@ -104,7 +104,7 @@ function Desktop() {
       >
         <ul className="flex flex-row items-center justify-between py-2 list-none">
           <li>
-            <button className="w-12 bg-transparent border-none cursor-pointer">
+            <button className="w-12 bg-transparent flex items-center justify-center h-8 border-none cursor-pointer">
               <img
                 src={home}
                 alt="Home"

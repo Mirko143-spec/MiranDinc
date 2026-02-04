@@ -16,7 +16,7 @@ function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
   return (
     <div
       id={id}
-      className="bg-gray-800 text-white shadow-2xl rounded-xl border-2 border-gray-700 overflow-hidden relative"
+      className="bg-gray-800 text-white shadow-2xl rounded-xl border-2 border-gray-700 overflow-hidden relative transition duration-300 ease-in-out"
       style={{
         position: "absolute",
         top: `${initialTop}px`,
