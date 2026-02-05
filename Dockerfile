@@ -2,6 +2,8 @@ FROM nginx:1.25.5-alpine
 
 WORKDIR /app
 
-COPY . /usr/share/nginx/html
+RUN npm run build
+
+COPY ./dist /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
