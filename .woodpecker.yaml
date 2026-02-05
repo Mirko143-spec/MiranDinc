@@ -7,7 +7,7 @@ steps:
       tags: git-${CI_COMMIT_SHA:0:4}
       dockerfile: Dockerfile
     when:
-      - event: [pull_request]
+      - event: [pull_request, push]
         branch:
           exclude: main
   - name: publish
