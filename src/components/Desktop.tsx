@@ -115,7 +115,8 @@ function Desktop({ handleLogout }: DesktopProps) {
         {menu ? (
           <button
             onClick={handleLogout}
-            className="absolute rounded-2xl p-2 flex flex-row items-center text-xs bottom-12 bg-white cursor-pointer text-black"
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+            className="absolute p-2 flex flex-row items-center text-xs bottom-[3.25rem] rounded-r-2xl cursor-pointer text-white"
           >
             <img src={lock} alt="Lock image" className="w-6" />
             LogOut
@@ -127,7 +128,7 @@ function Desktop({ handleLogout }: DesktopProps) {
           <li>
             <button
               onClick={handleClick}
-              className="w-12 bg-transparent flex items-center justify-center h-8 border-none cursor-pointer"
+              className="w-12 bg-transparent flex items-center justify-center h-8 border-none cursor-pointer outline-none"
             >
               <img
                 src={home}
