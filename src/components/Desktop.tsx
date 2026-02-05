@@ -6,6 +6,7 @@ import spotify from "../assets/spotify.png";
 import steam from "../assets/steam.png";
 import pokedex from "../assets/pokedex.png";
 import home from "../assets/home.png";
+import lock from "../assets/Lock.png";
 import DigitalClock from "./DigitalClock.tsx";
 import Window from "./Window.tsx";
 import { useState } from "react";
@@ -17,11 +18,16 @@ interface DesktopWindow {
   title: string;
 }
 
-function Desktop() {
+interface DesktopProps {
+  handleLogout: () => void;
+}
+
+function Desktop({ handleLogout }: DesktopProps) {
+  const [menu, setMenu] = useState<boolean>(false);
   const [windows, setWindows] = useState<DesktopWindow[]>([]);
   const baseOffset = 45;
 
-  const openNewWindow = (windowName: string) => {
+  function openNewWindow(windowName: string) {
     const count = windows.length;
     const id = `window-${Date.now()}-${count}`;
     setWindows((prev) => [
@@ -33,11 +39,15 @@ function Desktop() {
         title: windowName,
       },
     ]);
-  };
+  }
 
-  const closeWindow = (id: string) => {
+  function closeWindow(id: string) {
     setWindows((prev) => prev.filter((w) => w.id !== id));
-  };
+  }
+
+  function handleClick() {
+    setMenu(!menu);
+  }
   return (
     <>
       <section className="w-fit flex select-none flex-row">
@@ -102,9 +112,24 @@ function Desktop() {
         className="w-full h-fit absolute bottom-0 select-none"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
       >
+        {menu ? (
+          <button
+            onClick={handleLogout}
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+            className="absolute p-2 flex flex-row items-center text-xs bottom-[3.25rem] rounded-r-2xl cursor-pointer text-white"
+          >
+            <img src={lock} alt="Lock image" className="w-6" />
+            LogOut
+          </button>
+        ) : (
+          ""
+        )}
         <ul className="flex flex-row items-center justify-between py-2 list-none">
           <li>
-            <button className="w-12 bg-transparent flex items-center justify-center h-8 border-none cursor-pointer">
+            <button
+              onClick={handleClick}
+              className="w-12 bg-transparent flex items-center justify-center h-8 border-none cursor-pointer outline-none"
+            >
               <img
                 src={home}
                 alt="Home"
