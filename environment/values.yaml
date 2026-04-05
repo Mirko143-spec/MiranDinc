@@ -5,6 +5,7 @@ ingress:
   enabled: true
   className: nginx
   annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
     external-dns.alpha.kubernetes.io/target: tunnel.rojandinc.se
     nginx.ingress.kubernetes.io/enable-global-auth: "false"
   hosts:
