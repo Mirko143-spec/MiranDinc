@@ -8,7 +8,7 @@ interface LogInProps {
 function LogIn({ handleLogin }: LogInProps) {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const year = Temporal.Now.plainDateISO().year;
+  const year = new Date().getFullYear();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
