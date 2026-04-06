@@ -7,6 +7,9 @@ interface LogInProps {
 
 function LogIn({ handleLogin }: LogInProps) {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const year = new Date().getFullYear();
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -35,10 +38,11 @@ function LogIn({ handleLogin }: LogInProps) {
                 type="password"
                 autoFocus
               />
-              <p className="text-sm opacity-75">Hint: any password works</p>
+              <p className="text-sm m-2 opacity-75">Hint: any password works</p>
             </div>
           )}
         </form>
+        <p className="text-xs">&copy; {year}</p>
       </div>
     </div>
   );
