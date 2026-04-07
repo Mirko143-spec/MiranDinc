@@ -1,5 +1,6 @@
 import useDragger from "../hooks/useDragger";
 import useResizer from "../hooks/useResizer";
+import WindowContent from "./WindowContent";
 
 interface WindowProps {
   id: string;
@@ -21,8 +22,8 @@ function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
         position: "absolute",
         top: `${initialTop}px`,
         left: `${initialLeft}px`,
-        width: "20rem",
-        height: "16rem",
+        width: "40rem",
+        height: "26rem",
         zIndex: 1000,
       }}
     >
@@ -46,13 +47,10 @@ function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
       </div>
 
       <div
-        className="p-4 bg-gray-800 cursor-default select-none"
+        className="bg-gray-800 cursor-default select-none"
         style={{ height: "calc(100% - 2rem)", overflow: "auto" }}
       >
-        <p className="text-gray-300 text-sm mb-2">Welcome to {title}!</p>
-        <p className="text-gray-400 text-xs">
-          This is a draggable window prototype for my portfolio.
-        </p>
+        <WindowContent />
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ function LogIn({ handleLogin }: LogInProps) {
           className="my-auto flex flex-col items-center justify-center"
         >
           {loading ? (
-            "Loading..."
+            <p className="p-4">Loading...</p>
           ) : (
             <div className="flex flex-col items-center">
               <input
