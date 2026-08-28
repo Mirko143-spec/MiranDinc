@@ -3,7 +3,7 @@ image:
   tag: latest
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   annotations:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
     external-dns.alpha.kubernetes.io/target: tunnel.rojandinc.se
