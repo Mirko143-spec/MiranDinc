@@ -30,49 +30,50 @@ function Desktop({ handleLogout }: DesktopProps) {
           <Icon
             fileIcon={trash}
             fileName="Trash"
-            onDoubleClick={() => open("Trash")}
+            onDoubleClick={() => open("trash", "Trash")}
           />
           <Icon
             fileIcon={folder}
             fileName="Projects"
-            onDoubleClick={() => open("Projects")}
+            onDoubleClick={() => open("projects", "Projects")}
           />
           <Icon
             fileIcon={folder}
             fileName="About"
-            onDoubleClick={() => open("About")}
+            onDoubleClick={() => open("about", "About")}
           />
           <Icon
             fileIcon={chrome}
             fileName="Chrome"
-            onDoubleClick={() => open("Chrome")}
+            onDoubleClick={() => open("chrome", "Chrome")}
           />
           <Icon
             fileIcon={spotify}
             fileName="Spotify"
-            onDoubleClick={() => open("Spotify")}
+            onDoubleClick={() => open("spotify", "Spotify")}
           />
         </div>
         <div className="flex flex-col">
           <Icon
             fileIcon={folder}
             fileName="Games"
-            onDoubleClick={() => open("Games")}
+            onDoubleClick={() => open("games", "Games")}
           />
           <Icon
             fileIcon={steam}
             fileName="Steam"
-            onDoubleClick={() => open("Steam")}
+            onDoubleClick={() => open("steam", "Steam")}
           />
           <Icon
             fileIcon={pokedex}
             fileName="PokeDex"
-            onDoubleClick={() => open("PokeDex")}
+            onDoubleClick={() => open("pokedex", "PokeDex")}
           />
 
           {windows.map((w) => (
             <Window
               key={w.id}
+              appType={w.appType}
               initialTop={w.top}
               initialLeft={w.left}
               title={w.title}

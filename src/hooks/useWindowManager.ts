@@ -1,7 +1,9 @@
 import { useCallback, useRef, useState } from "react";
+import type { AppType } from "../components/apps/registry";
 
 export interface WindowState {
   id: string;
+  appType: AppType;
   top: number;
   left: number;
   title: string;
@@ -10,7 +12,7 @@ export interface WindowState {
 
 interface WindowManager {
   windows: WindowState[];
-  open: (title: string) => void;
+  open: (appType: AppType, title: string) => void;
   close: (id: string) => void;
   bringToFront: (id: string) => void;
 }
@@ -29,13 +31,14 @@ function useWindowManager(): WindowManager {
   }, []);
 
   const open = useCallback(
-    (title: string) => {
+    (appType: AppType, title: string) => {
       setWindows((prev) => {
         const count = prev.length;
         return [
           ...prev,
           {
             id: `window-${Date.now()}-${count}`,
+            appType,
             top: BASE_TOP + count * BASE_OFFSET,
             left: BASE_LEFT + count * BASE_OFFSET,
             title,

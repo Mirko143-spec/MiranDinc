@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import useWindowController from "../hooks/useWindowController";
+import { APP_REGISTRY, type AppType } from "./apps/registry";
 
 interface WindowProps {
+  appType: AppType;
   initialTop: number;
   initialLeft: number;
   title: string;
@@ -10,7 +12,8 @@ interface WindowProps {
   onActivate: () => void;
 }
 
-function Window({ initialTop, initialLeft, title, zIndex, onClose, onActivate }: WindowProps) {
+function Window({ appType, initialTop, initialLeft, title, zIndex, onClose, onActivate }: WindowProps) {
+  const Content = APP_REGISTRY[appType];
   const containerRef = useRef<HTMLDivElement>(null);
   const { style, containerProps, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
     initialTop,
@@ -56,10 +59,7 @@ function Window({ initialTop, initialLeft, title, zIndex, onClose, onActivate }:
         className="p-4 bg-gray-800 cursor-default select-none"
         style={{ height: "calc(100% - 2rem)", overflow: "auto" }}
       >
-        <p className="text-gray-300 text-sm mb-2">Welcome to {title}!</p>
-        <p className="text-gray-400 text-xs">
-          This is a draggable window prototype for my portfolio.
-        </p>
+        <Content title={title} />
       </div>
     </div>
   );
