@@ -1,36 +1,46 @@
-import useDragger from "../hooks/useDragger";
-import useResizer from "../hooks/useResizer";
+import { useRef } from "react";
+import useWindowController from "../hooks/useWindowController";
+import { APP_REGISTRY, type AppType } from "./apps/registry";
 
 interface WindowProps {
-  id: string;
+  appType: AppType;
   initialTop: number;
   initialLeft: number;
   title: string;
+  zIndex: number;
   onClose: () => void;
+  onActivate: () => void;
 }
 
-function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
-  useDragger(id);
-  useResizer(id);
+function Window({ appType, initialTop, initialLeft, title, zIndex, onClose, onActivate }: WindowProps) {
+  const Content = APP_REGISTRY[appType];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { style, containerProps, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
+    initialTop,
+    initialLeft,
+    onActivate,
+  });
 
   return (
     <div
-      id={id}
+      ref={containerRef}
+      {...containerProps}
       className="bg-gray-800 text-white shadow-2xl rounded-xl border-2 border-gray-700 overflow-hidden relative transition duration-300 ease-in-out"
       style={{
         position: "absolute",
-        top: `${initialTop}px`,
-        left: `${initialLeft}px`,
-        width: "20rem",
-        height: "16rem",
-        zIndex: 1000,
+        zIndex,
+        ...style,
       }}
     >
       <div
+        {...resizeHandleProps}
         className="resize-handle absolute bottom-[6px] right-[6px] w-2 h-2 bg-gray-600 hover:bg-gray-500 cursor-se-resize border border-gray-500 z-20"
         title="Resize"
       />
-      <div className="drag-handle h-8 bg-gray-700 flex items-center px-3 text-sm font-semibold cursor-move select-none border-b border-gray-600">
+      <div
+        {...dragHandleProps}
+        className="drag-handle h-8 bg-gray-700 flex items-center px-3 text-sm font-semibold cursor-move select-none border-b border-gray-600"
+      >
         <span className="truncate flex-1">{title}</span>
         <div className="flex gap-1">
           <button
@@ -49,10 +59,7 @@ function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
         className="p-4 bg-gray-800 cursor-default select-none"
         style={{ height: "calc(100% - 2rem)", overflow: "auto" }}
       >
-        <p className="text-gray-300 text-sm mb-2">Welcome to {title}!</p>
-        <p className="text-gray-400 text-xs">
-          This is a draggable window prototype for my portfolio.
-        </p>
+        <Content title={title} />
       </div>
     </div>
   );

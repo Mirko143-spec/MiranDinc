@@ -9,14 +9,8 @@ import home from "../assets/home.png";
 import lock from "../assets/Lock.png";
 import DigitalClock from "./DigitalClock.tsx";
 import Window from "./Window.tsx";
+import useWindowManager from "../hooks/useWindowManager";
 import { useState } from "react";
-
-interface DesktopWindow {
-  id: string;
-  top: number;
-  left: number;
-  title: string;
-}
 
 interface DesktopProps {
   handleLogout: () => void;
@@ -24,26 +18,7 @@ interface DesktopProps {
 
 function Desktop({ handleLogout }: DesktopProps) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [windows, setWindows] = useState<DesktopWindow[]>([]);
-  const baseOffset = 45;
-
-  function openNewWindow(windowName: string) {
-    const count = windows.length;
-    const id = `window-${Date.now()}-${count}`;
-    setWindows((prev) => [
-      ...prev,
-      {
-        id,
-        top: 120 + count * baseOffset,
-        left: 200 + count * baseOffset,
-        title: windowName,
-      },
-    ]);
-  }
-
-  function closeWindow(id: string) {
-    setWindows((prev) => prev.filter((w) => w.id !== id));
-  }
+  const { windows, open, close, bringToFront } = useWindowManager();
 
   function handleClick() {
     setMenu(!menu);
@@ -55,54 +30,56 @@ function Desktop({ handleLogout }: DesktopProps) {
           <Icon
             fileIcon={trash}
             fileName="Trash"
-            onDoubleClick={() => openNewWindow("Trash")}
+            onDoubleClick={() => open("trash", "Trash")}
           />
           <Icon
             fileIcon={folder}
             fileName="Projects"
-            onDoubleClick={() => openNewWindow("Projects")}
+            onDoubleClick={() => open("projects", "Projects")}
           />
           <Icon
             fileIcon={folder}
             fileName="About"
-            onDoubleClick={() => openNewWindow("About")}
+            onDoubleClick={() => open("about", "About")}
           />
           <Icon
             fileIcon={chrome}
             fileName="Chrome"
-            onDoubleClick={() => openNewWindow("Chrome")}
+            onDoubleClick={() => open("chrome", "Chrome")}
           />
           <Icon
             fileIcon={spotify}
             fileName="Spotify"
-            onDoubleClick={() => openNewWindow("Spotify")}
+            onDoubleClick={() => open("spotify", "Spotify")}
           />
         </div>
         <div className="flex flex-col">
           <Icon
             fileIcon={folder}
             fileName="Games"
-            onDoubleClick={() => openNewWindow("Games")}
+            onDoubleClick={() => open("games", "Games")}
           />
           <Icon
             fileIcon={steam}
             fileName="Steam"
-            onDoubleClick={() => openNewWindow("Steam")}
+            onDoubleClick={() => open("steam", "Steam")}
           />
           <Icon
             fileIcon={pokedex}
             fileName="PokeDex"
-            onDoubleClick={() => openNewWindow("PokeDex")}
+            onDoubleClick={() => open("pokedex", "PokeDex")}
           />
 
           {windows.map((w) => (
             <Window
               key={w.id}
-              id={w.id}
+              appType={w.appType}
               initialTop={w.top}
               initialLeft={w.left}
               title={w.title}
-              onClose={() => closeWindow(w.id)}
+              zIndex={w.zIndex}
+              onClose={() => close(w.id)}
+              onActivate={() => bringToFront(w.id)}
             />
           ))}
         </div>
