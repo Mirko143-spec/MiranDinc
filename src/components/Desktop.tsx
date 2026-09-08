@@ -9,13 +9,14 @@ import home from "../assets/home.png";
 import lock from "../assets/Lock.png";
 import DigitalClock from "./DigitalClock.tsx";
 import Window from "./Window.tsx";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 interface DesktopWindow {
   id: string;
   top: number;
   left: number;
   title: string;
+  zIndex: number;
 }
 
 interface DesktopProps {
@@ -26,6 +27,20 @@ function Desktop({ handleLogout }: DesktopProps) {
   const [menu, setMenu] = useState<boolean>(false);
   const [windows, setWindows] = useState<DesktopWindow[]>([]);
   const baseOffset = 45;
+  const zIndexCounter = useRef(1000);
+
+  const nextZIndex = useCallback(() => {
+    zIndexCounter.current += 1;
+    return zIndexCounter.current;
+  }, []);
+
+  const bringToFront = useCallback(
+    (id: string) => {
+      const zIndex = nextZIndex();
+      setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, zIndex } : w)));
+    },
+    [nextZIndex],
+  );
 
   function openNewWindow(windowName: string) {
     const count = windows.length;
@@ -37,6 +52,7 @@ function Desktop({ handleLogout }: DesktopProps) {
         top: 120 + count * baseOffset,
         left: 200 + count * baseOffset,
         title: windowName,
+        zIndex: nextZIndex(),
       },
     ]);
   }
@@ -101,7 +117,9 @@ function Desktop({ handleLogout }: DesktopProps) {
               initialTop={w.top}
               initialLeft={w.left}
               title={w.title}
+              zIndex={w.zIndex}
               onClose={() => closeWindow(w.id)}
+              onActivate={() => bringToFront(w.id)}
             />
           ))}
         </div>

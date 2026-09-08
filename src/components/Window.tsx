@@ -5,23 +5,27 @@ interface WindowProps {
   initialTop: number;
   initialLeft: number;
   title: string;
+  zIndex: number;
   onClose: () => void;
+  onActivate: () => void;
 }
 
-function Window({ initialTop, initialLeft, title, onClose }: WindowProps) {
+function Window({ initialTop, initialLeft, title, zIndex, onClose, onActivate }: WindowProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { style, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
+  const { style, containerProps, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
     initialTop,
     initialLeft,
+    onActivate,
   });
 
   return (
     <div
       ref={containerRef}
+      {...containerProps}
       className="bg-gray-800 text-white shadow-2xl rounded-xl border-2 border-gray-700 overflow-hidden relative transition duration-300 ease-in-out"
       style={{
         position: "absolute",
-        zIndex: 1000,
+        zIndex,
         ...style,
       }}
     >

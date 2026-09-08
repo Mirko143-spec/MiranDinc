@@ -12,10 +12,12 @@ interface UseWindowControllerOptions {
   initialLeft: number;
   initialWidth?: number;
   initialHeight?: number;
+  onActivate: () => void;
 }
 
 interface WindowControllerResult {
   style: CSSProperties;
+  containerProps: { onMouseDown: () => void };
   dragHandleProps: { onMouseDown: (event: MouseEvent) => void };
   resizeHandleProps: { onMouseDown: (event: MouseEvent) => void };
 }
@@ -32,6 +34,7 @@ function useWindowController(
     initialLeft,
     initialWidth = DEFAULT_WIDTH,
     initialHeight = DEFAULT_HEIGHT,
+    onActivate,
   }: UseWindowControllerOptions,
 ): WindowControllerResult {
   const [geometry, setGeometry] = useState<WindowGeometry>({
@@ -48,6 +51,7 @@ function useWindowController(
       event.preventDefault();
       const target = containerRef.current;
       if (!target) return;
+      onActivate();
 
       start.current = {
         x: event.clientX,
@@ -76,7 +80,7 @@ function useWindowController(
       document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("mouseup", onMouseUp);
     },
-    [containerRef],
+    [containerRef, onActivate],
   );
 
   const beginResize = useCallback(
@@ -84,6 +88,7 @@ function useWindowController(
       event.stopPropagation();
       const target = containerRef.current;
       if (!target) return;
+      onActivate();
 
       start.current = {
         x: event.clientX,
@@ -114,7 +119,7 @@ function useWindowController(
       document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("mouseup", onMouseUp);
     },
-    [containerRef],
+    [containerRef, onActivate],
   );
 
   return {
@@ -124,6 +129,7 @@ function useWindowController(
       width: `${geometry.width}px`,
       height: `${geometry.height}px`,
     },
+    containerProps: { onMouseDown: onActivate },
     dragHandleProps: { onMouseDown: beginDrag },
     resizeHandleProps: { onMouseDown: beginResize },
   };
