@@ -78,8 +78,10 @@ function Desktop({ handleLogout }: DesktopProps) {
               initialLeft={w.left}
               title={w.title}
               zIndex={w.zIndex}
+              content={w.content}
               onClose={() => close(w.id)}
               onActivate={() => bringToFront(w.id)}
+              openWindow={open}
             />
           ))}
         </div>

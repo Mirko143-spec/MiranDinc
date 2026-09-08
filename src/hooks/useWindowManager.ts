@@ -8,11 +8,12 @@ export interface WindowState {
   left: number;
   title: string;
   zIndex: number;
+  content?: string;
 }
 
 interface WindowManager {
   windows: WindowState[];
-  open: (appType: AppType, title: string) => void;
+  open: (appType: AppType, title: string, content?: string) => void;
   close: (id: string) => void;
   bringToFront: (id: string) => void;
 }
@@ -31,7 +32,7 @@ function useWindowManager(): WindowManager {
   }, []);
 
   const open = useCallback(
-    (appType: AppType, title: string) => {
+    (appType: AppType, title: string, content?: string) => {
       setWindows((prev) => {
         const count = prev.length;
         return [
@@ -43,6 +44,7 @@ function useWindowManager(): WindowManager {
             left: BASE_LEFT + count * BASE_OFFSET,
             title,
             zIndex: nextZIndex(),
+            content,
           },
         ];
       });
