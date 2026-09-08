@@ -18,7 +18,7 @@ interface DesktopProps {
 
 function Desktop({ handleLogout }: DesktopProps) {
   const [menu, setMenu] = useState<boolean>(false);
-  const { windows, openNewWindow, closeWindow, bringToFront } = useWindowManager();
+  const { windows, open, close, bringToFront } = useWindowManager();
 
   function handleClick() {
     setMenu(!menu);
@@ -30,44 +30,44 @@ function Desktop({ handleLogout }: DesktopProps) {
           <Icon
             fileIcon={trash}
             fileName="Trash"
-            onDoubleClick={() => openNewWindow("Trash")}
+            onDoubleClick={() => open("Trash")}
           />
           <Icon
             fileIcon={folder}
             fileName="Projects"
-            onDoubleClick={() => openNewWindow("Projects")}
+            onDoubleClick={() => open("Projects")}
           />
           <Icon
             fileIcon={folder}
             fileName="About"
-            onDoubleClick={() => openNewWindow("About")}
+            onDoubleClick={() => open("About")}
           />
           <Icon
             fileIcon={chrome}
             fileName="Chrome"
-            onDoubleClick={() => openNewWindow("Chrome")}
+            onDoubleClick={() => open("Chrome")}
           />
           <Icon
             fileIcon={spotify}
             fileName="Spotify"
-            onDoubleClick={() => openNewWindow("Spotify")}
+            onDoubleClick={() => open("Spotify")}
           />
         </div>
         <div className="flex flex-col">
           <Icon
             fileIcon={folder}
             fileName="Games"
-            onDoubleClick={() => openNewWindow("Games")}
+            onDoubleClick={() => open("Games")}
           />
           <Icon
             fileIcon={steam}
             fileName="Steam"
-            onDoubleClick={() => openNewWindow("Steam")}
+            onDoubleClick={() => open("Steam")}
           />
           <Icon
             fileIcon={pokedex}
             fileName="PokeDex"
-            onDoubleClick={() => openNewWindow("PokeDex")}
+            onDoubleClick={() => open("PokeDex")}
           />
 
           {windows.map((w) => (
@@ -77,7 +77,7 @@ function Desktop({ handleLogout }: DesktopProps) {
               initialLeft={w.left}
               title={w.title}
               zIndex={w.zIndex}
-              onClose={() => closeWindow(w.id)}
+              onClose={() => close(w.id)}
               onActivate={() => bringToFront(w.id)}
             />
           ))}

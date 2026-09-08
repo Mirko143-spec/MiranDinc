@@ -10,8 +10,8 @@ export interface WindowState {
 
 interface WindowManager {
   windows: WindowState[];
-  openNewWindow: (title: string) => void;
-  closeWindow: (id: string) => void;
+  open: (title: string) => void;
+  close: (id: string) => void;
   bringToFront: (id: string) => void;
 }
 
@@ -28,7 +28,7 @@ function useWindowManager(): WindowManager {
     return zIndexCounter.current;
   }, []);
 
-  const openNewWindow = useCallback(
+  const open = useCallback(
     (title: string) => {
       setWindows((prev) => {
         const count = prev.length;
@@ -47,7 +47,7 @@ function useWindowManager(): WindowManager {
     [nextZIndex],
   );
 
-  const closeWindow = useCallback((id: string) => {
+  const close = useCallback((id: string) => {
     setWindows((prev) => prev.filter((w) => w.id !== id));
   }, []);
 
@@ -59,7 +59,7 @@ function useWindowManager(): WindowManager {
     [nextZIndex],
   );
 
-  return { windows, openNewWindow, closeWindow, bringToFront };
+  return { windows, open, close, bringToFront };
 }
 
 export default useWindowManager;
