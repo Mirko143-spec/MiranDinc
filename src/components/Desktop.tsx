@@ -98,7 +98,6 @@ function Desktop({ handleLogout }: DesktopProps) {
           {windows.map((w) => (
             <Window
               key={w.id}
-              id={w.id}
               initialTop={w.top}
               initialLeft={w.left}
               title={w.title}

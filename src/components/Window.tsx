@@ -1,36 +1,39 @@
-import useDragger from "../hooks/useDragger";
-import useResizer from "../hooks/useResizer";
+import { useRef } from "react";
+import useWindowController from "../hooks/useWindowController";
 
 interface WindowProps {
-  id: string;
   initialTop: number;
   initialLeft: number;
   title: string;
   onClose: () => void;
 }
 
-function Window({ id, initialTop, initialLeft, title, onClose }: WindowProps) {
-  useDragger(id);
-  useResizer(id);
+function Window({ initialTop, initialLeft, title, onClose }: WindowProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { style, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
+    initialTop,
+    initialLeft,
+  });
 
   return (
     <div
-      id={id}
+      ref={containerRef}
       className="bg-gray-800 text-white shadow-2xl rounded-xl border-2 border-gray-700 overflow-hidden relative transition duration-300 ease-in-out"
       style={{
         position: "absolute",
-        top: `${initialTop}px`,
-        left: `${initialLeft}px`,
-        width: "20rem",
-        height: "16rem",
         zIndex: 1000,
+        ...style,
       }}
     >
       <div
+        {...resizeHandleProps}
         className="resize-handle absolute bottom-[6px] right-[6px] w-2 h-2 bg-gray-600 hover:bg-gray-500 cursor-se-resize border border-gray-500 z-20"
         title="Resize"
       />
-      <div className="drag-handle h-8 bg-gray-700 flex items-center px-3 text-sm font-semibold cursor-move select-none border-b border-gray-600">
+      <div
+        {...dragHandleProps}
+        className="drag-handle h-8 bg-gray-700 flex items-center px-3 text-sm font-semibold cursor-move select-none border-b border-gray-600"
+      >
         <span className="truncate flex-1">{title}</span>
         <div className="flex gap-1">
           <button
