@@ -1,19 +1,22 @@
 import { useCallback, useRef, useState } from "react";
-import type { AppType } from "../components/apps/registry";
+import type { AppType, ExplorerSection, OpenWindowOptions } from "../components/apps/registry";
 
 export interface WindowState {
   id: string;
   appType: AppType;
   top: number;
   left: number;
+  width?: number;
+  height?: number;
   title: string;
   zIndex: number;
   content?: string;
+  section?: ExplorerSection;
 }
 
 interface WindowManager {
   windows: WindowState[];
-  open: (appType: AppType, title: string, content?: string) => void;
+  open: (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => void;
   close: (id: string) => void;
   bringToFront: (id: string) => void;
 }
@@ -32,8 +35,20 @@ function useWindowManager(): WindowManager {
   }, []);
 
   const open = useCallback(
-    (appType: AppType, title: string, content?: string) => {
+    (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => {
       setWindows((prev) => {
+        if (appType === "explorer") {
+          const existing = prev.find((w) => w.appType === "explorer");
+          if (existing) {
+            const zIndex = nextZIndex();
+            return prev.map((w) =>
+              w.id === existing.id
+                ? { ...w, zIndex, section: options?.section ?? w.section }
+                : w,
+            );
+          }
+        }
+
         const count = prev.length;
         return [
           ...prev,
@@ -42,9 +57,12 @@ function useWindowManager(): WindowManager {
             appType,
             top: BASE_TOP + count * BASE_OFFSET,
             left: BASE_LEFT + count * BASE_OFFSET,
+            width: options?.width,
+            height: options?.height,
             title,
             zIndex: nextZIndex(),
             content,
+            section: options?.section,
           },
         ];
       });

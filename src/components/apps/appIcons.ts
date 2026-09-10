@@ -9,11 +9,9 @@ import type { AppType } from "./registry";
 
 export const APP_ICONS: Record<AppType, string> = {
   trash,
-  projects: folder,
-  about: folder,
+  explorer: folder,
   chrome,
   spotify,
-  games: folder,
   steam,
   pokedex,
   file: picture,
