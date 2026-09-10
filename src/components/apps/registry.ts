@@ -1,35 +1,32 @@
 import type { ComponentType } from "react";
 import DefaultApp from "./DefaultApp";
 import PokeDexApp from "./PokeDexApp";
-import AboutFolderApp from "./AboutFolderApp";
-import ProjectsFolderApp from "./ProjectsFolderApp";
-import GamesFolderApp from "./GamesFolderApp";
+import FileExplorerApp from "./FileExplorerApp";
 import FileViewerApp from "./FileViewerApp";
 
 export type AppType =
   | "trash"
-  | "projects"
-  | "about"
+  | "explorer"
   | "chrome"
   | "spotify"
-  | "games"
   | "steam"
   | "pokedex"
   | "file";
 
+export type ExplorerSection = "about" | "projects" | "games";
+
 export interface AppContentProps {
   title: string;
   content?: string;
+  section?: ExplorerSection;
   openWindow?: (appType: AppType, title: string, content?: string) => void;
 }
 
 export const APP_REGISTRY: Record<AppType, ComponentType<AppContentProps>> = {
   trash: DefaultApp,
-  projects: ProjectsFolderApp,
-  about: AboutFolderApp,
+  explorer: FileExplorerApp,
   chrome: DefaultApp,
   spotify: DefaultApp,
-  games: GamesFolderApp,
   steam: DefaultApp,
   pokedex: PokeDexApp,
   file: FileViewerApp,

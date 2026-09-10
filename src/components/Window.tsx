@@ -1,27 +1,46 @@
 import { useRef } from "react";
 import useWindowController from "../hooks/useWindowController";
-import { APP_REGISTRY, type AppType } from "./apps/registry";
+import { APP_REGISTRY, type AppType, type ExplorerSection } from "./apps/registry";
 
 interface WindowProps {
   appType: AppType;
   initialTop: number;
   initialLeft: number;
+  initialWidth?: number;
+  initialHeight?: number;
   title: string;
   zIndex: number;
   content?: string;
+  section?: ExplorerSection;
   onClose: () => void;
   onActivate: () => void;
   openWindow?: (appType: AppType, title: string, content?: string) => void;
 }
 
-function Window({ appType, initialTop, initialLeft, title, zIndex, content, onClose, onActivate, openWindow }: WindowProps) {
+function Window({
+  appType,
+  initialTop,
+  initialLeft,
+  initialWidth,
+  initialHeight,
+  title,
+  zIndex,
+  content,
+  section,
+  onClose,
+  onActivate,
+  openWindow,
+}: WindowProps) {
   const Content = APP_REGISTRY[appType];
   const containerRef = useRef<HTMLDivElement>(null);
   const { style, containerProps, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
     initialTop,
     initialLeft,
+    initialWidth,
+    initialHeight,
     onActivate,
   });
+  const isExplorer = appType === "explorer";
 
   return (
     <div
@@ -58,10 +77,10 @@ function Window({ appType, initialTop, initialLeft, title, zIndex, content, onCl
       </div>
 
       <div
-        className="p-4 bg-gray-800 cursor-default select-none"
-        style={{ height: "calc(100% - 2rem)", overflow: "auto" }}
+        className={`bg-gray-800 cursor-default select-none ${isExplorer ? "" : "p-4"}`}
+        style={{ height: "calc(100% - 2rem)", overflow: isExplorer ? "hidden" : "auto" }}
       >
-        <Content title={title} content={content} openWindow={openWindow} />
+        <Content title={title} content={content} section={section} openWindow={openWindow} />
       </div>
     </div>
   );

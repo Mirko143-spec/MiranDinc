@@ -36,12 +36,24 @@ function Desktop({ handleLogout }: DesktopProps) {
           <Icon
             fileIcon={folder}
             fileName="Projects"
-            onDoubleClick={() => open("projects", "Projects")}
+            onDoubleClick={() =>
+              open("explorer", "File Explorer", undefined, {
+                section: "projects",
+                width: 700,
+                height: 450,
+              })
+            }
           />
           <Icon
             fileIcon={folder}
             fileName="About"
-            onDoubleClick={() => open("about", "About")}
+            onDoubleClick={() =>
+              open("explorer", "File Explorer", undefined, {
+                section: "about",
+                width: 700,
+                height: 450,
+              })
+            }
           />
           <Icon
             fileIcon={chrome}
@@ -58,7 +70,13 @@ function Desktop({ handleLogout }: DesktopProps) {
           <Icon
             fileIcon={folder}
             fileName="Games"
-            onDoubleClick={() => open("games", "Games")}
+            onDoubleClick={() =>
+              open("explorer", "File Explorer", undefined, {
+                section: "games",
+                width: 700,
+                height: 450,
+              })
+            }
           />
           <Icon
             fileIcon={steam}
@@ -77,9 +95,12 @@ function Desktop({ handleLogout }: DesktopProps) {
               appType={w.appType}
               initialTop={w.top}
               initialLeft={w.left}
+              initialWidth={w.width}
+              initialHeight={w.height}
               title={w.title}
               zIndex={w.zIndex}
               content={w.content}
+              section={w.section}
               onClose={() => close(w.id)}
               onActivate={() => bringToFront(w.id)}
               openWindow={open}
