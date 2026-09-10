@@ -8,11 +8,13 @@ interface WindowProps {
   initialLeft: number;
   title: string;
   zIndex: number;
+  content?: string;
   onClose: () => void;
   onActivate: () => void;
+  openWindow?: (appType: AppType, title: string, content?: string) => void;
 }
 
-function Window({ appType, initialTop, initialLeft, title, zIndex, onClose, onActivate }: WindowProps) {
+function Window({ appType, initialTop, initialLeft, title, zIndex, content, onClose, onActivate, openWindow }: WindowProps) {
   const Content = APP_REGISTRY[appType];
   const containerRef = useRef<HTMLDivElement>(null);
   const { style, containerProps, dragHandleProps, resizeHandleProps } = useWindowController(containerRef, {
@@ -59,7 +61,7 @@ function Window({ appType, initialTop, initialLeft, title, zIndex, onClose, onAc
         className="p-4 bg-gray-800 cursor-default select-none"
         style={{ height: "calc(100% - 2rem)", overflow: "auto" }}
       >
-        <Content title={title} />
+        <Content title={title} content={content} openWindow={openWindow} />
       </div>
     </div>
   );

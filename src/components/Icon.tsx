@@ -14,7 +14,7 @@ function Icon({ fileIcon, fileName, onDoubleClick }: PropTypes) {
         >
           <img src={fileIcon} alt={fileName} className="w-16" />
         </button>
-        <p className="text-xs">{fileName}</p>
+        <p className="text-xs w-[7.6rem] mx-auto break-words">{fileName}</p>
       </div>
     </>
   );
