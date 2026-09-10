@@ -1,6 +1,12 @@
 import { useRef } from "react";
 import useWindowController from "../hooks/useWindowController";
-import { APP_REGISTRY, type AppType, type ExplorerSection } from "./apps/registry";
+import {
+  APP_REGISTRY,
+  SECTION_LABELS,
+  type AppType,
+  type ExplorerSection,
+  type OpenWindowOptions,
+} from "./apps/registry";
 
 interface WindowProps {
   appType: AppType;
@@ -14,7 +20,7 @@ interface WindowProps {
   section?: ExplorerSection;
   onClose: () => void;
   onActivate: () => void;
-  openWindow?: (appType: AppType, title: string, content?: string) => void;
+  openWindow?: (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => void;
 }
 
 function Window({
@@ -62,7 +68,17 @@ function Window({
         {...dragHandleProps}
         className="drag-handle h-8 bg-gray-700 flex items-center px-3 text-sm font-semibold cursor-move select-none border-b border-gray-600"
       >
-        <span className="truncate flex-1">{title}</span>
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <span className="truncate shrink-0">{title}</span>
+          {isExplorer && section && (
+            <>
+              <span className="w-[2px] h-4 bg-white/20 shrink-0"></span>
+              <span className="truncate min-w-0 text-xs font-normal text-gray-300">
+                {SECTION_LABELS[section]}
+              </span>
+            </>
+          )}
+        </div>
         <div className="flex gap-1">
           <button
             className="w-4 h-4 bg-yellow-500 rounded-full hover:bg-yellow-400 mx-1"

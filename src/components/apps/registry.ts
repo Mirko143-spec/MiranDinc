@@ -15,11 +15,23 @@ export type AppType =
 
 export type ExplorerSection = "about" | "projects" | "games";
 
+export const SECTION_LABELS: Record<ExplorerSection, string> = {
+  about: "About",
+  projects: "Projects",
+  games: "Games",
+};
+
+export interface OpenWindowOptions {
+  section?: ExplorerSection;
+  width?: number;
+  height?: number;
+}
+
 export interface AppContentProps {
   title: string;
   content?: string;
   section?: ExplorerSection;
-  openWindow?: (appType: AppType, title: string, content?: string) => void;
+  openWindow?: (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => void;
 }
 
 export const APP_REGISTRY: Record<AppType, ComponentType<AppContentProps>> = {

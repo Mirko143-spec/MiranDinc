@@ -1,5 +1,5 @@
-import { useState } from "react";
 import type { AppContentProps, ExplorerSection } from "./registry";
+import { SECTION_LABELS } from "./registry";
 import FileGrid from "./FileGrid";
 import folder from "../../assets/folder.png";
 import { aboutFiles } from "../../data/aboutFiles";
@@ -9,25 +9,17 @@ import type { FileEntry } from "../../data/types";
 
 interface SectionDef {
   id: ExplorerSection;
-  label: string;
   files: FileEntry[];
 }
 
 const SECTIONS: SectionDef[] = [
-  { id: "about", label: "About", files: aboutFiles },
-  { id: "projects", label: "Projects", files: projectsFiles },
-  { id: "games", label: "Games", files: gamesFiles },
+  { id: "about", files: aboutFiles },
+  { id: "projects", files: projectsFiles },
+  { id: "games", files: gamesFiles },
 ];
 
 function FileExplorerApp({ section, openWindow }: AppContentProps) {
-  const [selected, setSelected] = useState<ExplorerSection>(section ?? "about");
-  const [prevSection, setPrevSection] = useState(section);
-
-  if (section && section !== prevSection) {
-    setPrevSection(section);
-    setSelected(section);
-  }
-
+  const selected = section ?? "about";
   const active = SECTIONS.find((s) => s.id === selected) ?? SECTIONS[0];
 
   return (
@@ -37,13 +29,15 @@ function FileExplorerApp({ section, openWindow }: AppContentProps) {
           {SECTIONS.map((s) => (
             <li key={s.id}>
               <button
-                onClick={() => setSelected(s.id)}
+                onClick={() =>
+                  openWindow?.("explorer", "File Explorer", undefined, { section: s.id })
+                }
                 className={`w-full flex items-center gap-2 px-3 py-2 text-xs text-left border-0 cursor-pointer ${
                   s.id === selected ? "bg-white/20 text-white" : "bg-transparent text-gray-300"
                 }`}
               >
                 <img src={folder} alt="" className="w-5 h-5 shrink-0" />
-                <span className="truncate min-w-0">{s.label}</span>
+                <span className="truncate min-w-0">{SECTION_LABELS[s.id]}</span>
               </button>
             </li>
           ))}

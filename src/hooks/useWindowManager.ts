@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import type { AppType, ExplorerSection } from "../components/apps/registry";
+import type { AppType, ExplorerSection, OpenWindowOptions } from "../components/apps/registry";
 
 export interface WindowState {
   id: string;
@@ -14,15 +14,9 @@ export interface WindowState {
   section?: ExplorerSection;
 }
 
-interface OpenOptions {
-  section?: ExplorerSection;
-  width?: number;
-  height?: number;
-}
-
 interface WindowManager {
   windows: WindowState[];
-  open: (appType: AppType, title: string, content?: string, options?: OpenOptions) => void;
+  open: (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => void;
   close: (id: string) => void;
   bringToFront: (id: string) => void;
 }
@@ -41,7 +35,7 @@ function useWindowManager(): WindowManager {
   }, []);
 
   const open = useCallback(
-    (appType: AppType, title: string, content?: string, options?: OpenOptions) => {
+    (appType: AppType, title: string, content?: string, options?: OpenWindowOptions) => {
       setWindows((prev) => {
         if (appType === "explorer") {
           const existing = prev.find((w) => w.appType === "explorer");
