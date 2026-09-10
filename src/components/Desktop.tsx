@@ -9,6 +9,7 @@ import home from "../assets/home.png";
 import lock from "../assets/Lock.png";
 import DigitalClock from "./DigitalClock.tsx";
 import Window from "./Window.tsx";
+import Taskbar from "./Taskbar.tsx";
 import useWindowManager from "../hooks/useWindowManager";
 import { useState } from "react";
 
@@ -103,7 +104,7 @@ function Desktop({ handleLogout }: DesktopProps) {
         ) : (
           ""
         )}
-        <ul className="flex flex-row items-center justify-between py-2 list-none">
+        <ul className="flex flex-row items-center py-2 list-none">
           <li>
             <button
               onClick={handleClick}
@@ -115,6 +116,9 @@ function Desktop({ handleLogout }: DesktopProps) {
                 className="w-[2.7rem] my-2 mx-[0.7rem]"
               />
             </button>
+          </li>
+          <li className="flex-1 min-w-0">
+            <Taskbar windows={windows} onSelect={bringToFront} />
           </li>
           <li>
             <DigitalClock />
