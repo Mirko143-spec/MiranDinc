@@ -8,4 +8,4 @@ Do not add any Claude/AI attribution to commits or PRs — no `Co-Authored-By: C
 
 ## Commit cadence
 
-Commit after finishing each piece of work (a feature, a fix, a requested change) without waiting to be asked. Do not push, though — only push when I explicitly tell you to.
+Commit after finishing each piece of work (a feature, a fix, a requested change) without waiting to be asked. Then push, and open a PR for the branch if one doesn't already exist — do this without waiting to be asked.
