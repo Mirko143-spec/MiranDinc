@@ -24,8 +24,8 @@ interface WindowControllerResult {
 
 const MIN_WIDTH = 200;
 const MIN_HEIGHT = 150;
-const DEFAULT_WIDTH = 320;
-const DEFAULT_HEIGHT = 256;
+const DEFAULT_WIDTH = 600;
+const DEFAULT_HEIGHT = 350;
 
 function useWindowController(
   containerRef: RefObject<HTMLDivElement | null>,
