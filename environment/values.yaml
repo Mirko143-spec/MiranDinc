@@ -5,8 +5,8 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-    external-dns.alpha.kubernetes.io/target: tunnel.rojandinc.se
+    external-dns.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.kubernetes.io/target: tunnel.rojandinc.se
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
