@@ -14,10 +14,6 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
-    - secretName: mirko-tls
-      hosts:
-        - mirko.rojandinc.se
 service:
   port: 80
 resources:
